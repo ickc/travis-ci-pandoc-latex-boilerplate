@@ -1,0 +1,37 @@
+# macOS files
+.DS_Store
+
+# LaTeX auxiliary files
+*.aux
+*.dvi
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.run.xml
+
+# generated files
+## md to tex
+*/*.tex
+## csv to tex
+*-7a.tex
+*-8a.tex
+*-master.tex
+## md to md
+*-7a.md
+*-8a.md
+*-master.md
+## LaTeX to PDF
+workbook-*.pdf
+## MD to tex/pdf
+*-workbook.pdf
+*-workbook.tex
+## README
+README.pdf
+
+# PDF versions of README
+README/*.pdf
+
+# workbook.tex is now generated from workbook.yml
+workbook.tex
