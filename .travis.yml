@@ -10,7 +10,6 @@ install:
     - tlmgr install latexmk
     - tlmgr install physics
     - tlmgr install cancel
-    - tlmgr install siunitx
     - pip install -U pandocfilters
 script:
     - make
