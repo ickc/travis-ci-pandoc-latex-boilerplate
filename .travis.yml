@@ -3,20 +3,24 @@ matrix:
         - os: linux
           sudo: required
           dist: trusty
+          install:
+              - tlmgr install latexmk
+              - tlmgr install physics
+              - tlmgr install cancel
         - os: osx
           osx_image: xcode8
+          install:
+              - sudo tlmgr install latexmk
+              - sudo tlmgr install physics
+              - sudo tlmgr install cancel
+              - sudo tlmgr install siunitx
+              - sudo tlmgr install placeins
 language: r
 pandoc_version: 1.17.2
 cache: [packages, pip]
 before_install:
     - pip install -U pip
-install:
     - pip install -U pandocfilters
-    - sudo tlmgr install latexmk
-    - sudo tlmgr install physics
-    - sudo tlmgr install cancel
-    - sudo tlmgr install siunitx #macOS only
-    - sudo tlmgr install placeins #macOS only
 script:
     - make
     - make pandoc
