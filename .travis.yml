@@ -12,7 +12,7 @@ install:
     - tlmgr install physics
     - tlmgr install cancel
     - # tlmgr install longtable
-    - tlmgr install graphicx
+    - # tlmgr install graphicx
     - tlmgr install grffile
 script:
     - make
