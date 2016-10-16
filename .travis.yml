@@ -1,16 +1,23 @@
 language: r
 cache: [packages, pip]
-sudo: required
-dist: trusty
+matrix:
+    include:
+        - os: linux
+          sudo: required
+          dist: trusty
+        - os: osx
+          osx_image: xcode8
 pandoc_version: 1.17.2
 before_install:
     - pip install -U pip
-    - tlmgr update --self
+    - sudo tlmgr update --self
 install:
     - pip install -U pandocfilters
-    - tlmgr install latexmk
-    - tlmgr install physics
-    - tlmgr install cancel
+    - sudo tlmgr install latexmk
+    - sudo tlmgr install physics
+    - sudo tlmgr install cancel
+    - sudo tlmgr install siunitx #macOS only
+    - sudo tlmgr install placeins #macOS only
 script:
     - make
     - make pandoc
