@@ -13,7 +13,7 @@ install:
     - tlmgr install cancel
     - # tlmgr install longtable
     - # tlmgr install graphicx
-    - tlmgr install grffile
+    - # tlmgr install grffile
 script:
     - make
     - make pandoc
