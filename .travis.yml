@@ -1,6 +1,3 @@
-language: r
-pandoc_version: 1.17.2
-cache: [packages, pip]
 matrix:
     include:
         - os: linux
@@ -8,6 +5,9 @@ matrix:
           dist: trusty
         - os: osx
           osx_image: xcode8
+language: r
+pandoc_version: 1.17.2
+cache: [packages, pip]
 before_install:
     - pip install -U pip
 install:
