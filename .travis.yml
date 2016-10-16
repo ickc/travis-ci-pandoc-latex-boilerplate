@@ -1,5 +1,5 @@
 language: r
-cache: packages
+cache: [packages, pip]
 sudo: required
 dist: trusty
 pandoc_version: 1.17.2
