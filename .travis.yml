@@ -11,7 +11,7 @@ install:
     - tlmgr install latexmk
     - tlmgr install physics
     - tlmgr install cancel
-    - tlmgr install longtable
+    - # tlmgr install longtable
     - tlmgr install graphicx
     - tlmgr install grffile
 script:
