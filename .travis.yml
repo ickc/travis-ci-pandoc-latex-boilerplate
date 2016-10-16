@@ -5,7 +5,10 @@ dist: trusty
 pandoc_version: 1.17.2
 before_install:
     - tlmgr update --self
+    - pip install -U pip
 install:
+    - tlmgr install latexmk
+    - tlmgr install physics
     - pip install -U pandocfilters
 script:
     - make
