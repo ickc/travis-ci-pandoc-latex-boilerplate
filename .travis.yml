@@ -1,0 +1,51 @@
+matrix:
+    include:
+        - os: linux
+          sudo: false
+          before_install:
+              - pip install --user pandocfilters
+          install:
+              - tlmgr install latexmk
+              - tlmgr install physics
+              - tlmgr install cancel
+        - os: linux
+          sudo: required
+          dist: trusty
+          before_install:
+              - pip install -U pip
+              - pip install -U pandocfilters
+          install:
+              - tlmgr install latexmk
+              - tlmgr install physics
+              - tlmgr install cancel
+        - os: osx
+          osx_image: xcode8
+          before_install:
+              - pip install -U pip
+              - pip install -U pandocfilters
+          install:
+              - sudo tlmgr install latexmk
+              - sudo tlmgr install physics
+              - sudo tlmgr install cancel
+              - sudo tlmgr install siunitx
+              - sudo tlmgr install placeins
+language: r
+pandoc_version: 1.17.2
+cache: [packages, pip]
+script:
+    - make
+    - make pandoc
+deploy:
+  provider: releases
+  api_key: "$GH_TOKEN"
+  file:
+    - "README.pdf"
+    - "workbook-7a.pdf"
+    - "workbook-8a.pdf"
+    - "workbook-master.pdf"
+    - "7a-workbook.pdf"
+    - "8a-workbook.pdf"
+    - "master-workbook.pdf"
+  skip_cleanup: true
+  on:
+    tags: true
