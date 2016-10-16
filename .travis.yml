@@ -1,0 +1,26 @@
+language: r
+cache: packages
+sudo: required
+dist: trusty
+pandoc_version: 1.17.2
+before_install:
+    - tlmgr update --self
+install:
+    - pip install -U pandocfilters
+script:
+    - make
+    - make pandoc
+deploy:
+  provider: releases
+  api_key: "$GH_TOKEN"
+  file:
+    - "README.pdf"
+    - "workbook-7a.pdf"
+    - "workbook-8a.pdf"
+    - "workbook-master.pdf"
+    - "7a-workbook.pdf"
+    - "8a-workbook.pdf"
+    - "master-workbook.pdf"
+  skip_cleanup: true
+  on:
+    tags: true
