@@ -1,4 +1,5 @@
 language: r
+pandoc_version: 1.17.2
 cache: [packages, pip]
 matrix:
     include:
@@ -7,10 +8,8 @@ matrix:
           dist: trusty
         - os: osx
           osx_image: xcode8
-pandoc_version: 1.17.2
 before_install:
     - pip install -U pip
-    - sudo tlmgr update --self
 install:
     - pip install -U pandocfilters
     - sudo tlmgr install latexmk
