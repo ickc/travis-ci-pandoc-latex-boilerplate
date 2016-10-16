@@ -17,6 +17,9 @@ install:
 script:
     - make
     - make pandoc
+    - find . -iname '*.tex' -exec grep -ir 'longtable' '{}' \;
+    - find . -iname '*.tex' -exec grep -ir 'graphicx' '{}' \;
+    - find . -iname '*.tex' -exec grep -ir 'grffile' '{}' \;
 deploy:
   provider: releases
   api_key: "$GH_TOKEN"
