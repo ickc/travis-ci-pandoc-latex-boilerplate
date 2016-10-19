@@ -25,13 +25,9 @@
 ## LaTeX to PDF
 workbook-*.pdf
 ## MD to tex/pdf
-*-workbook.pdf
-*-workbook.tex
+workbook_*
 ## README
 README.pdf
-
-# PDF versions of README
-README/*.pdf
 
 # workbook.tex is now generated from workbook.yml
 workbook.tex
