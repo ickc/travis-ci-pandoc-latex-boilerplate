@@ -43,9 +43,9 @@ deploy:
     - "workbook-7a.pdf"
     - "workbook-8a.pdf"
     - "workbook-master.pdf"
-    - "7a-workbook.pdf"
-    - "8a-workbook.pdf"
-    - "master-workbook.pdf"
+    - "workbook_7a.pdf"
+    - "workbook_8a.pdf"
+    - "workbook_master.pdf"
   skip_cleanup: true
   on:
     tags: true
