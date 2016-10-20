@@ -15,13 +15,13 @@
 ## md to tex
 */*.tex
 ## csv to tex
-*-7a.tex
-*-8a.tex
-*-master.tex
+*-7A.tex
+*-8A.tex
+*-Master.tex
 ## md to md
-*-7a.md
-*-8a.md
-*-master.md
+*-7A.md
+*-8A.md
+*-Master.md
 ## LaTeX to PDF
 workbook-*.pdf
 ## MD to tex/pdf
