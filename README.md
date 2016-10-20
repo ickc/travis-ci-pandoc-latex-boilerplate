@@ -22,9 +22,9 @@ Description
 
 This is a test of the config of travis CI on a private project.
 
--   `README-*.md` are empty
--   `makefile`, `workbook.sty`, `workbook.yml`, `.gitignore` are from the project
--   `README-organization.md`, `workbook.csv`, `test1*`, `test2*` are dummy contents
+-   `README-*.md` are empty except for `README-main.md`.
+-   `makefile`, `workbook.sty`, `workbook.yml`, `.gitignore`, `script/*` are from the project, `README-main.md` are appended from the project
+-   `workbook.csv`, `test1*`, `test2*` are dummy contents
 
 Testing Travis CI With Pandoc and TeXLive
 -----------------------------------------
