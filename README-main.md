@@ -5,6 +5,7 @@ This is a test of the config of travis CI on a private project.
 - `README-*.md` are empty except for `README-main.md`.
 - `makefile`, `workbook.sty`, `workbook.yml`, `.gitignore`, `script/*` are from the project, `README-main.md` are appended from the project
 - `workbook.csv`, `test1*`, `test2*` are dummy contents
+- `make.sh` auto copies the necessary files from the private repository
 
 ## Testing Travis CI With Pandoc and TeXLive
 
