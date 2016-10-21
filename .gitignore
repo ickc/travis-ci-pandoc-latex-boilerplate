@@ -28,6 +28,8 @@ workbook-*.pdf
 workbook_*
 ## README
 README.pdf
+README
+README-pdf.md
 
 # workbook.tex is now generated from workbook.yml
 workbook.tex
