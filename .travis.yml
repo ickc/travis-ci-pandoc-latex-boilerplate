@@ -33,19 +33,18 @@ language: r
 pandoc_version: 1.17.2
 cache: [packages, pip]
 script:
-    - make
-    - make pandoc
+    - make all
 deploy:
   provider: releases
   api_key: "$GH_TOKEN"
   file:
     - "README.pdf"
-    - "workbook-7a.pdf"
-    - "workbook-8a.pdf"
-    - "workbook-master.pdf"
-    - "workbook_7a.pdf"
-    - "workbook_8a.pdf"
-    - "workbook_master.pdf"
+    - "workbook-7A.pdf"
+    - "workbook-8A.pdf"
+    - "workbook-Master.pdf"
+    - "workbook_7A.pdf"
+    - "workbook_8A.pdf"
+    - "workbook_Master.pdf"
   skip_cleanup: true
   on:
     tags: true
