@@ -1,13 +1,16 @@
 ---
 subtitle:	Department of Physics, University of California, Berkeley
 author:	Kolen Cheung
-date:	\today
+institute: University of California, Berkeley
 abstract:	Abstract here.
 keywords:	UCB, Physics, Introductory
 fontsize:	11pt
 documentclass:	memoir
 geometry:	inner=1in, outer=1in, top=1in, bottom=1.25in
 fontfamily:	lmodern,siunitx,cancel,physics,placeins
+include-before:
+    - \frontmatter
+secnumdepth: 0
 amsthm:
   plain:	[Theorem]
   plain-unnumbered:	[Lemma, Proposition, Corollary]

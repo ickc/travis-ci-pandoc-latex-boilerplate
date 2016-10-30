@@ -15,21 +15,22 @@
 ## md to tex
 */*.tex
 ## csv to tex
-*-7A.tex
-*-8A.tex
-*-Master.tex
+/*_7A.tex
+/*_8A.tex
+/*_Master.tex
 ## md to md
-*-7A.md
-*-8A.md
-*-Master.md
+/*-7A.md
+/*-8A.md
+/*-Master.md
 ## LaTeX to PDF
-workbook-*.pdf
+/workbook_*.pdf
 ## MD to tex/pdf
-workbook_*
+/workbook-*
 ## README
-README.pdf
-README
-README-pdf.md
+/README/pdf.md
 
 # workbook.tex is now generated from workbook.yml
-workbook.tex
+/workbook.tex
+
+# For `make detectRAW`
+*.native

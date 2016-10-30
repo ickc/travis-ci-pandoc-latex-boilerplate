@@ -30,7 +30,7 @@ matrix:
               - sudo tlmgr install siunitx
               - sudo tlmgr install placeins
 language: r
-pandoc_version: 1.17.2
+pandoc_version: 1.18
 cache: [packages, pip]
 script:
     - make all
