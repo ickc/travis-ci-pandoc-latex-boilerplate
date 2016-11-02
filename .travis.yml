@@ -2,6 +2,8 @@ matrix:
     include:
         - os: linux
           sudo: false
+          language: r
+          pandoc_version: 1.18
           before_install:
               - pip install --user pandocfilters
           install:
@@ -11,6 +13,8 @@ matrix:
         - os: linux
           sudo: required
           dist: trusty
+          language: r
+          pandoc_version: 1.18
           before_install:
               - pip install -U pip
               - pip install -U pandocfilters
@@ -18,8 +22,25 @@ matrix:
               - tlmgr install latexmk
               - tlmgr install physics
               - tlmgr install cancel
+        - os: linux
+          sudo: required
+          dist: trusty
+          language: python
+          before_install:
+              - sudo apt-get -qq update
+              - pip install -U pip
+          addons:
+            apt:
+              packages:
+              - texlive-full
+          install:
+              - pip install pandocfilters
+              - wget https://github.com/jgm/pandoc/releases/download/1.18/pandoc-1.18-1-amd64.deb
+              - sudo dpkg -i pandoc-1.18-1-amd64.deb
         - os: osx
           osx_image: xcode8
+          language: r
+          pandoc_version: 1.18
           before_install:
               - pip install -U pip
               - pip install -U pandocfilters
@@ -29,9 +50,7 @@ matrix:
               - sudo tlmgr install cancel
               - sudo tlmgr install siunitx
               - sudo tlmgr install placeins
-language: r
-pandoc_version: 1.18
-cache: [packages, pip]
+cache: [packages, pip, apt]
 script:
     - make -j4 travis
 deploy:
