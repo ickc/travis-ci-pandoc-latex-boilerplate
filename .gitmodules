@@ -1,3 +1,6 @@
 [submodule "submodule/pandoc-amsthm"]
 	path = submodule/pandoc-amsthm
 	url = https://github.com/ickc/pandoc-amsthm
+[submodule "submodule/markdown-latex-css"]
+	path = submodule/markdown-latex-css
+	url = https://github.com/ickc/markdown-latex-css
