@@ -8,6 +8,8 @@ matrix:
               - tlmgr install latexmk
               - tlmgr install physics
               - tlmgr install cancel
+          script:
+              - make -j4 travis
         - os: linux
           sudo: required
           dist: trusty
@@ -18,6 +20,8 @@ matrix:
               - tlmgr install latexmk
               - tlmgr install physics
               - tlmgr install cancel
+          script:
+              - make -j4 travis
         - os: osx
           osx_image: xcode8
           before_install:
@@ -29,22 +33,21 @@ matrix:
               - sudo tlmgr install cancel
               - sudo tlmgr install siunitx
               - sudo tlmgr install placeins
+          script:
+              - make -j2 travis
 language: r
 pandoc_version: 1.18
 cache: [packages, pip]
-script:
-    - make all
 deploy:
   provider: releases
   api_key: "$GH_TOKEN"
   file:
-    - "README.pdf"
     - "workbook-7A.pdf"
     - "workbook-8A.pdf"
     - "workbook-Master.pdf"
-    - "workbook_7A.pdf"
-    - "workbook_8A.pdf"
-    - "workbook_Master.pdf"
+    - "workbook-7A.epub"
+    - "workbook-8A.epub"
+    - "workbook-Master.epub"
   skip_cleanup: true
   on:
     tags: true
