@@ -92,4 +92,3 @@ Notice that in Mac the file system is by default case-insensitive. If you make a
     -   Prefer "$a$-$t$ graph" rather than "acceleration versus time graph", etc.
 -   other spelling: `vs.`
 -   If possible, do not use non-ASCII characters, exception: `™`, `Ampére`, `Schriödinger`
-

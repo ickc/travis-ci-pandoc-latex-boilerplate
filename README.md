@@ -92,17 +92,28 @@ Makefile
 -   `make Clean` (notice the capital `C`) will delete all auxiliary files **including** the PDFs
 -   To terminate the process, use `Ctrl-D` or `Ctrl-C`.
 
-### Preprocessing Individual Problems
+### Automation on Individual Units
 
 The `makefile` contains a lot of helpful commands for initial creation of problems:
 
--   `make touch`: create every files expected from the `.csv` filenames.
--   `make unspan`: remove `span` surrounding emphasis.
--   `make enclose`: enclose every problem with a problem environment if not present yet.
--   `make normalize`: normalize white spaces in the files.
--   `make detect`: highlight unicode characters
--   `make convert`: auto-convert docx math expression to LaTeX math expression
--   `make lint`: use `chktex` and `pacheco` to check for potential typographical mistakes in the files.
+-   Preparation:
+    -   `make touch`: create every files expected from the `.csv` filenames.
+    -   `make enclose`: enclose every problem with a problem environment if not present yet.
+-   Batch formatting and styling:
+    -   `make unspan`: remove `span` surrounding emphasis.
+    -   `make convert`: auto-convert `doc` math expression to LaTeX math expression
+    -   `make nonbreaking`: auto create non-breaking space after shortform
+-   Cleanup source code:
+    -   `make normalize`: normalize white spaces in the files.
+    -   `make style`: use pandoc to conform the source into a style. Must use `make normalize` after this command: `make style && make normalize`.
+-   Detecting potential problems:
+    -   `make detect`: highlight “illegal” characters (defined by me)
+    -   `make detectStrict`: highlight any unicode characters
+    -   `make detectAllCaps`: detect all-capped words — typographically poor when it is not necessary (e.g. abbreviations).
+    -   `make detectRAW`: detect any raw HTML and raw LaTeX syntax in pandoc’s internal AST format (useful to ensure the source is portable for both HTML and LaTeX generation).
+    -   `make detectDollar`: detect `$` sign, probably are math which accidentally turned into `Code` (unparsed).
+    -   `make detectCode`: A more general detection to detect accidental `Code` (unparsed).
+    -   `make lint`: use `chktex` and `lacheck` to check for potential typographical mistakes in the files.
 
 Naming Convention
 -----------------
@@ -126,7 +137,7 @@ Contributing
 
 -   Do not italicize Latin: `e.g.`, `i.e.`. See [Latin phrases in scientific writing: italics or not | Editage Insights](http://www.editage.com/insights/latin-phrases-in-scientific-writing-italics-or-not).
 -   End shortform in non-breaking space, like this: `e.g.\ some example`, `i.e.\ the law...`. The backslash escaped space, `\ \ \ ...`, represented a non-breaking space. See more at [Nonbreaking spaces | Butterick’s Practical Typography](http://practicaltypography.com/nonbreaking-spaces.html).
--   Math delimiters: dollar sign with be used: `$...$`, `$$...$$`. The output in LaTeX will actually be `\(...\)` and `\[...\]` (i.e. *correct*, as you may know, `$`s are decouraged in LaTeX). However in pandoc, `\` means escape. So if one want to output `\(`, you need to type `\\(` instead, i.e. cumbersome.
+-   Math delimiters: dollar sign with be used: `$...$`, `$$...$$`. The output in LaTeX will actually be `\(...\)` and `\[...\]` (i.e. *correct*, as you may know, `$`s are decouraged in LaTeX). However in pandoc, `\` means escape. So if one want to output `\(`, you need to type `\\(` instead, i.e. cumbersome.
 -   LaTeX packages:
     -   use `physics`: why:
         -   try $\\frac{dx}{dt}$ vs $\\dv{x}{t}$.
