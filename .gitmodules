@@ -4,3 +4,9 @@
 [submodule "submodule/markdown-latex-css"]
 	path = submodule/markdown-latex-css
 	url = https://github.com/ickc/markdown-latex-css
+[submodule "submodule/pandoc-data-dir"]
+	path = submodule/pandoc-data-dir
+	url = https://github.com/ickc/pandoc-data-dir
+[submodule "submodule/markdown-variants"]
+	path = submodule/markdown-variants
+	url = https://github.com/ickc/markdown-variants
