@@ -7,21 +7,16 @@ matrix:
           before_install:
               - pip install --user pandocfilters
           install:
-              - tlmgr install latexmk
-              - tlmgr install physics
-              - tlmgr install cancel
+              - tlmgr install latexmk physics cancel fourier utopia
         - os: linux
           sudo: required
           dist: trusty
           language: r
           pandoc_version: 1.18
           before_install:
-              - pip install -U pip
-              - pip install -U pandocfilters
+              - pip install -U pip pandocfilters
           install:
-              - tlmgr install latexmk
-              - tlmgr install physics
-              - tlmgr install cancel
+              - tlmgr install latexmk physics cancel fourier utopia
         - os: linux
           sudo: required
           dist: trusty
@@ -34,22 +29,16 @@ matrix:
               packages:
               - texlive-full
           install:
+              - wget https://github.com/jgm/pandoc/releases/download/1.18/pandoc-1.18-1-amd64.deb && sudo dpkg -i pandoc-1.18-1-amd64.deb
               - pip install pandocfilters
-              - wget https://github.com/jgm/pandoc/releases/download/1.18/pandoc-1.18-1-amd64.deb
-              - sudo dpkg -i pandoc-1.18-1-amd64.deb
         - os: osx
           osx_image: xcode8
           language: r
           pandoc_version: 1.18
           before_install:
-              - pip install -U pip
-              - pip install -U pandocfilters
+              - pip install -U pip pandocfilters
           install:
-              - sudo tlmgr install latexmk
-              - sudo tlmgr install physics
-              - sudo tlmgr install cancel
-              - sudo tlmgr install siunitx
-              - sudo tlmgr install placeins
+              - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
 cache: [packages, pip, apt]
 script:
     - make -j4 travis
