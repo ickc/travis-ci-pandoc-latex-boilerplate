@@ -37,6 +37,8 @@ MD2Native := $(patsubst %.md,%.native,$(MD))
 filterPath:=submodule/pandoc-amsthm/bin
 headerPath:=submodule/pandoc-amsthm/template/include
 mathjaxPath:=submodule/markdown-latex-css/js/mathjax
+convertPath:=submodule/markdown-variants/bin
+dataDirPath:=submodule/pandoc-data-dir/includes
 CSSURL:=https://ickc.github.io/markdown-latex-css
 pandocArgCommon := -f markdown+autolink_bare_uris-fancy_lists --toc --normalize -S -V linkcolorblue -V citecolor=blue -V urlcolor=blue -V toccolor=blue --latex-engine=$(pandocEngine) -M date="`date "+%B %e, %Y"`"
 # README
@@ -47,17 +49,18 @@ pandocArgReadmeGitHub := $(pandocArgCommon) --toc-depth=2 -s -t markdown_github 
 latexmkArg := -$(latexmkEngine)
 pandocArgFragment := $(pandocArgCommon) --top-level-division=part --filter=$(filterPath)/pandoc-amsthm.py
 ## pandoc workflow
-pandocArgStandalone := $(pandocArgFragment) --toc-depth=1 -s -N -H $(headerPath)/default.tex -H workbook.sty
+pandocArgStandalone := $(pandocArgFragment) --toc-depth=1 -s -N -H workbook-template.tex -H workbook.sty
 ## HTML
-pandocArgHTML := $(pandocArgFragment) -t $(HTMLVersion) --toc-depth=2 -s -N -H $(headerPath)/default.html -H $(mathjaxPath)/setup-mathjax-cdn.html --mathjax -c $(CSSURL)/css/common.css -c $(CSSURL)/fonts/fonts.css
+pandocArgHTML := $(pandocArgFragment) -t $(HTMLVersion) --toc-depth=2 -s -N -H workbook-template.html -H $(mathjaxPath)/setup-mathjax-cdn.html --mathjax -c $(CSSURL)/css/common.css -c $(CSSURL)/fonts/fonts.css
 pandocArgePub := $(pandocArgHTML) -t $(ePubVersion) -H $(mathjaxPath)/load-mathjax-cdn.html --epub-chapter-level=2
 ## MD
 pandocArgMD := -f markdown+abbreviations+autolink_bare_uris+markdown_attribute+mmd_header_identifiers+mmd_link_attributes+mmd_title_block+tex_math_double_backslash-latex_macros-auto_identifiers -t markdown+raw_tex-native_spans-simple_tables-multiline_tables-grid_tables-latex_macros --normalize -s --wrap=none --column=999 --atx-headers --reference-location=block --file-scope
 
 # A list of dependencies
 ## make workbook.tex requires workbook.yml to be the first
-preamble := workbook.yml workbook.sty $(headerPath)/default.tex $(filterPath)/pandoc-amsthm.py
-HTMLHeader := $(headerPath)/default.html $(mathjaxPath)/setup-mathjax-cdn.html $(filterPath)/pandoc-amsthm.py
+workbookTemplate := workbook-template.tex workbook-template.html
+preamble := workbook.yml workbook.sty workbook-template.tex $(filterPath)/pandoc-amsthm.py
+HTMLHeader := workbook-template.html $(mathjaxPath)/setup-mathjax-cdn.html $(filterPath)/pandoc-amsthm.py
 ePubHeader := $(HTMLHeader) $(mathjaxPath)/load-mathjax-cdn.html
 
 # building
@@ -83,12 +86,12 @@ all: readme latexmk pandoc md html epub
 ## clean everything
 Clean:
 	latexmk -C -f $(latexmkTeX) $(pandocTeX)
-	rm -f $(latexmkTeX) $(pandocMD) $(pandocHTML) $(pandocePub) $(pandocTeX) $(CSV2List7A) $(CSV2List8A) $(CSV2ListMaster) $(MD2TeX) $(MD2Native) workbook.tex
+	rm -f $(latexmkTeX) $(pandocMD) $(pandocHTML) $(pandocePub) $(pandocTeX) $(CSV2List7A) $(CSV2List8A) $(CSV2ListMaster) $(MD2TeX) $(MD2Native) workbook.tex $(workbookTemplate)
 	rm -rf $(pandocePubUnzip)
 ## clean everthing but PDF output
 clean:
 	latexmk -c -f $(latexmkTeX) $(pandocTeX)
-	rm -f $(latexmkTeX) $(pandocMD) $(pandocHTML) $(pandocePub) $(pandocTeX) $(CSV2List7A) $(CSV2List8A) $(CSV2ListMaster) $(MD2TeX) $(MD2Native) workbook.tex
+	rm -f $(latexmkTeX) $(pandocMD) $(pandocHTML) $(pandocePub) $(pandocTeX) $(CSV2List7A) $(CSV2List8A) $(CSV2ListMaster) $(MD2TeX) $(MD2Native) workbook.tex $(workbookTemplate)
 	rm -rf $(pandocePubUnzip)
 
 # update submodule
@@ -98,9 +101,9 @@ update:
 # Automation on */*.md, in the order from draft to finish #############################################################################################################################################
 
 # Preparation
-## this touches all md files expected from the CSV. Best for initial creation.
-touch:
-	listCollection=$$(cut -d, -f 1 workbook.csv | tail -n +2);for eachCollection in $$listCollection; do mkdir -p $$eachCollection && listUnit=$$(cut -d, -f 1 $$eachCollection.csv | tail -n +2 | sed 's=^\(.*\)$$='$$eachCollection'/\1.md=g') && touch $$listUnit & done
+## this touches all md files expected from the CSV. Best for initial creation. 1st xargs loops through all collections in workbook, 2nd xargs loops through all units in each collection.
+touch: workbook-Master.list
+	< $< xargs touch
 ## enclose environments: ignore filename containing `-fm` and `lab`, and files containing a div.
 enclose:
 	find . -maxdepth 2 -mindepth 2 -iname "*.md" | xargs -i -n1 -P8 bash -c 'if [[ "$$0" != *"-fm"* && "$$0" != *"lab"* && "$$0" != *"README"* ]]; then if ! grep -q "<div class=" "$$0"; then script/enclose-problem-environment.sh "$$0"; fi; fi' {}
@@ -111,7 +114,7 @@ unspan:
 	find . -maxdepth 2 -mindepth 2 -iname "*.md" -exec sed -i 's/<span>\([*]\+\)\([^*]\+\)\([*]\+\)<\/span>/\1\2\3/g' {} +
 ## convert unicode to LaTeX Math
 convert:
-	find . -maxdepth 2 -mindepth 2 -iname "*.md" | xargs -i -n1 -P8 script/unicode-to-math.sh {}
+	find . -maxdepth 2 -mindepth 2 -iname "*.md" | xargs -i -n1 -P8 $(convertPath)/unicode-to-math.sh {}
 ## auto create non-breaking space after shortform
 nonbreaking:
 	find . -maxdepth 2 -mindepth 2 -iname "*.md" -exec sed -i -e 's/e\.g\. /e\.g\.\\ /g' -e 's/i\.e\. /i\.e\.\\ /g' {} +
@@ -164,20 +167,28 @@ README.md: README-Master.list
 	printf "%s\n\n" "<!--This README is auto-generated from \`README/*.md\`. Do not edit this file directly.-->" "[![Build Status](https://travis-ci.com/ucb-physics/workbook-7-8.svg?token=JQDb9LAgeZpmqErJzpBD&branch=master)](https://travis-ci.com/ucb-physics/workbook-7-8)" > $@
 	< $< xargs pandoc $(pandocArgReadmeGitHub) >> $@
 
-# Preparation: LaTeX workflow
-## $(MD2Native): debug
+# Preparation
+## LaTeX workflow
+### $(MD2Native): debug
 %.native: %.md workbook.yml $(filterPath)/pandoc-amsthm.py
 	pandoc $(pandocArgFragment) -t native -o $@ workbook.yml $<
-## $(MD2TeX)
+### $(MD2TeX)
 %.tex: %.md workbook.yml $(filterPath)/pandoc-amsthm.py
 	pandoc $(pandocArgFragment) -o $@ workbook.yml $<
-## workbook.tex
+### workbook.tex
 workbook.tex: $(preamble)
 	pandoc $(pandocArgStandalone) -t latex $< | sed 's/\\end{document}//' > $@
-## $(latexmkTeX)
+### $(latexmkTeX)
 workbook_%.tex: workbook-%.list workbook.csv workbook.tex
 	sed 's=^\(.*\)\.md$$=\\input{\1.tex}=g' $< | cat workbook.tex - > $@
 	printf "%s\n" "\end{document}" >> $@
+## pandoc workflow
+### $(workbookTemplate)
+workbook-template.tex: workbook.yml $(dataDirPath)/hypersetup.latex $(dataDirPath)/usepackage.latex $(headerPath)/pandoc-amsthm.latex
+	cat $(dataDirPath)/hypersetup.latex $(dataDirPath)/usepackage.latex $(headerPath)/pandoc-amsthm.latex > $@
+	pandoc --template=$@ $< -o $@
+workbook-template.html: workbook.yml $(headerPath)/pandoc-amsthm.html
+	pandoc --template=$(headerPath)/pandoc-amsthm.html $< -o $@
 
 # $(CSV2List*)
 ## workbook-*.list

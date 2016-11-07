@@ -26,14 +26,22 @@ Run the `script/install-*.sh` scripts to install the dependencies for the projec
 
 ### Building the PDFs
 
-`makefile`: all actions required to build the workbook is there. In terminal,
+`makefile`: all actions required to build the workbook is there. You can optionally use `-j8` to parallelize the job in 8 instances. In terminal,
 
 -   `cd` into the folder
--   `make` will compile the workbook
--   `make pandoc` will compile the workbook in an alternative way. The resulting PDFs should be visually identical to `make`.
+-   `make -j8` will compile the workbook
 -   `make clean` will delete all auxiliary files other than the PDFs
 -   `make Clean` (notice the capital `C`) will delete all auxiliary files **including** the PDFs
 -   To terminate the process, use `Ctrl-D` or `Ctrl-C`.
+
+There are some alternative builds:
+
+-   `make -j8 pandoc` will compile the workbook in an alternative way. The resulting PDFs should be visually identical to `make`.
+-   `make -j8 Master` will build the `workbook-Master.pdf` only. Similarly for `make -j8 7A` and `make -j8 8A`.
+-   `make -j8 md`, `make -j8 html`, `make -j8 epub` the project in those formats respectively.
+-   `make readme` will make the readme for GitHub.
+-   `make -j8 all` will make everything above.
+-   `make update`: Update submodule
 
 ### Automation on Individual Units
 
@@ -92,3 +100,4 @@ Notice that in Mac the file system is by default case-insensitive. If you make a
     -   Prefer "$a$-$t$ graph" rather than "acceleration versus time graph", etc.
 -   other spelling: `vs.`
 -   If possible, do not use non-ASCII characters, exception: `™`, `Ampére`, `Schriödinger`
+
