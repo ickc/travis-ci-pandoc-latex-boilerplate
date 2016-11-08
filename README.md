@@ -37,18 +37,13 @@ Todo
 Statistics
 ----------
 
-| OS              | Language | pandoc/LaTeX | Time       |                                                               Travis CI Build \#|
-|-----------------|----------|--------------|------------|--------------------------------------------------------------------------------:|
-| Ubuntu 12.04    | R        | Both         | 2 min 15 s |  [54](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/168124576)|
-| Ubuntu 14.04    | R        | LaTeXmk      | 1 min 40 s |  [37](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/167984036)|
-| Ubuntu 14.04    | R        | pandoc       | 1 min 47 s |  [36](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/167983871)|
-| Ubuntu 14.04    | R        | Both         | 1 min 57 s |  [34](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/167982738)|
-| OS X El Capitan | R        | LaTeXmk      | 6 min 9 s  |  [39](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/167984116)|
-| OS X El Capitan | R        | pandoc       | 6 min 31 s |  [38](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/167984066)|
-| OS X El Capitan | R        | Both         | 7 min 4 s  |  [35](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/167983084)|
-| Ubuntu 14.04    | Python   | Both         | 8 min 14 s |  [27](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/167979150)|
-| Dual OSes       | R        | Both         | 9 min 40 s |  [43](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/167995239)|
-| Triple OSes     | R        | Both         | 8 min 35 s |  [55](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/builds/168132853)|
+| OS              | Language | Time       |                                                                Travis CI Build \#|
+|-----------------|----------|------------|---------------------------------------------------------------------------------:|
+| Ubuntu 12.04    | R        | 1 min 20 s |  [107.1](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107099)|
+| Ubuntu 14.04    | R        | 1 min 34 s |  [107.2](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107100)|
+| Ubuntu 14.04    | Python   | 8 min 21 s |  [107.3](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107101)|
+| OS X El Capitan | R        | 8 min 25 s |  [107.4](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107102)|
+| OS X El Capitan | Generic  | 6 min 42 s |  [107.5](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107103)|
 
 <!-- from the private project: -->
 README
@@ -83,14 +78,22 @@ Makefile
 
 ### Building the PDFs
 
-`makefile`: all actions required to build the workbook is there. In terminal,
+`makefile`: all actions required to build the workbook is there. You can optionally use `-j8` to parallelize the job in 8 instances. In terminal,
 
 -   `cd` into the folder
--   `make` will compile the workbook
--   `make pandoc` will compile the workbook in an alternative way. The resulting PDFs should be visually identical to `make`.
+-   `make -j8` will compile the workbook
 -   `make clean` will delete all auxiliary files other than the PDFs
 -   `make Clean` (notice the capital `C`) will delete all auxiliary files **including** the PDFs
 -   To terminate the process, use `Ctrl-D` or `Ctrl-C`.
+
+There are some alternative builds:
+
+-   `make -j8 pandoc` will compile the workbook in an alternative way. The resulting PDFs should be visually identical to `make`.
+-   `make -j8 Master` will build the `workbook-Master.pdf` only. Similarly for `make -j8 7A` and `make -j8 8A`.
+-   `make -j8 md`, `make -j8 html`, `make -j8 epub` the project in those formats respectively.
+-   `make readme` will make the readme for GitHub.
+-   `make -j8 all` will make everything above.
+-   `make update`: Update submodule
 
 ### Automation on Individual Units
 
