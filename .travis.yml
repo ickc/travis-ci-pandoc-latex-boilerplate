@@ -54,7 +54,7 @@ matrix:
           install:
               - pip install -U pip pandocfilters
               - export PATH="/Library/TeX/texbin:$PATH" && sudo tlmgr update --self
-              - sudo tlmgr install latexmk physics cancel siunitx placeins
+              - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
           cache:
           - pip
         - os: osx
@@ -77,7 +77,7 @@ matrix:
           install:
               - pip install -U pip pandocfilters
               - export PATH="/Library/TeX/texbin:$PATH" && sudo tlmgr update --self
-              - sudo tlmgr install latexmk physics cancel siunitx placeins
+              - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
           cache:
           - pip
 script:
