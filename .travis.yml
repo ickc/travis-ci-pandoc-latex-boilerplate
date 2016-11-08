@@ -37,6 +37,27 @@ matrix:
           cache:
           - pip
         - os: osx
+          language: r
+          pandoc_version: 1.18
+          install:
+              - pip install -U pip pandocfilters
+              - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
+          cache:
+          - packages
+          - pip
+        - os: osx
+          language: generic
+          before_install:
+              - brew update
+              - brew install pandoc
+              - brew cask install basictex
+          install:
+              - pip install -U pip pandocfilters
+              - export PATH="/Library/TeX/texbin:$PATH" && sudo tlmgr update --self
+              - sudo tlmgr install latexmk physics cancel siunitx placeins
+          cache:
+          - pip
+        - os: osx
           osx_image: xcode8
           language: r
           pandoc_version: 1.18
