@@ -37,13 +37,15 @@ Todo
 Statistics
 ----------
 
-| OS              | Language | Time       |                                                                Travis CI Build \#|
-|-----------------|----------|------------|---------------------------------------------------------------------------------:|
-| Ubuntu 12.04    | R        | 1 min 20 s |  [107.1](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107099)|
-| Ubuntu 14.04    | R        | 1 min 34 s |  [107.2](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107100)|
-| Ubuntu 14.04    | Python   | 8 min 21 s |  [107.3](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107101)|
-| OS X El Capitan | R        | 8 min 25 s |  [107.4](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107102)|
-| OS X El Capitan | Generic  | 6 min 42 s |  [107.5](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174107103)|
+| OS              | Language  | Time       |                                                                Travis CI Build \#|
+|-----------------|-----------|------------|---------------------------------------------------------------------------------:|
+| Ubuntu 12.04    | R         | 1 min 15 s |  [111.1](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174118169)|
+| Ubuntu 14.04    | R         | 1 min 46 s |  [111.2](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174118170)|
+| Ubuntu 14.04    | Python    | 8 min 23 s |  [111.3](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174118171)|
+| OS X El Capitan | R         | 7 min 58 s |  [111.4](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174118172)|
+| OS X El Capitan | Generic   | 2 min 07 s |  [111.5](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174118173)|
+| OS X El Capitan | R, Xcode8 | 7 min 48 s |  [111.6](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174118174)|
+| OS X El Capitan | Xcode8    | 3 min 44 s |  [111.7](https://travis-ci.org/ickc/travis-ci-pandoc-latex-config/jobs/174118175)|
 
 <!-- from the private project: -->
 README
