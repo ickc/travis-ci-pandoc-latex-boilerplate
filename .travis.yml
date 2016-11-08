@@ -4,9 +4,8 @@ matrix:
           sudo: false
           language: r
           pandoc_version: 1.18
-          before_install:
-              - pip install --user pandocfilters
           install:
+              - pip install --user pandocfilters
               - tlmgr install latexmk physics cancel fourier utopia
           cache:
           - packages
@@ -16,9 +15,8 @@ matrix:
           dist: trusty
           language: r
           pandoc_version: 1.18
-          before_install:
-              - pip install -U pip pandocfilters
           install:
+              - pip install -U pip pandocfilters
               - tlmgr install latexmk physics cancel fourier utopia
           cache:
           - packages
@@ -29,23 +27,21 @@ matrix:
           language: python
           before_install:
               - sudo apt-get -qq update
-              - pip install -U pip
           addons:
             apt:
               packages:
               - texlive-full
           install:
+              - pip install -U pip pandocfilters
               - wget https://github.com/jgm/pandoc/releases/download/1.18/pandoc-1.18-1-amd64.deb && sudo dpkg -i pandoc-1.18-1-amd64.deb
-              - pip install pandocfilters
           cache:
           - pip
         - os: osx
           osx_image: xcode8
           language: r
           pandoc_version: 1.18
-          before_install:
-              - pip install -U pip pandocfilters
           install:
+              - pip install -U pip pandocfilters
               - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
           cache:
           - packages
