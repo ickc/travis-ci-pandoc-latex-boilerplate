@@ -8,6 +8,9 @@ matrix:
               - pip install --user pandocfilters
           install:
               - tlmgr install latexmk physics cancel fourier utopia
+          cache:
+          - packages
+          - pip
         - os: linux
           sudo: required
           dist: trusty
@@ -17,6 +20,9 @@ matrix:
               - pip install -U pip pandocfilters
           install:
               - tlmgr install latexmk physics cancel fourier utopia
+          cache:
+          - packages
+          - pip
         - os: linux
           sudo: required
           dist: trusty
@@ -31,6 +37,8 @@ matrix:
           install:
               - wget https://github.com/jgm/pandoc/releases/download/1.18/pandoc-1.18-1-amd64.deb && sudo dpkg -i pandoc-1.18-1-amd64.deb
               - pip install pandocfilters
+          cache:
+          - pip
         - os: osx
           osx_image: xcode8
           language: r
@@ -39,7 +47,9 @@ matrix:
               - pip install -U pip pandocfilters
           install:
               - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
-cache: [packages, pip, apt]
+          cache:
+          - packages
+          - pip
 script:
     - make -j4 travis
 deploy:
