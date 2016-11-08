@@ -46,6 +46,19 @@ matrix:
           cache:
           - packages
           - pip
+        - os: osx
+          osx_image: xcode8
+          language: generic
+          before_install:
+              - brew update
+              - brew install pandoc
+              - brew cask install basictex
+          install:
+              - pip install -U pip pandocfilters
+              - export PATH="/Library/TeX/texbin:$PATH" && sudo tlmgr update --self
+              - sudo tlmgr install latexmk physics cancel siunitx placeins
+          cache:
+          - pip
 script:
     - make -j4 travis
 deploy:
