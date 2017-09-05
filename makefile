@@ -43,7 +43,7 @@ filterPath:=submodule/pandoc-amsthm/bin
 headerPath:=submodule/pandoc-amsthm/template/include
 mathjaxPath:=submodule/markdown-latex-css/js/mathjax
 convertPath:=submodule/markdown-variants/bin
-CSSURL:=https://ickc.github.io/markdown-latex-css
+CSSURL:=https://cdn.jsdelivr.net/gh/ickc/markdown-latex-css
 # command line arguments
 pandocArgCommon := -f markdown+autolink_bare_uris-fancy_lists --toc --normalize -S -V linkcolorblue -V citecolor=blue -V urlcolor=blue -V toccolor=blue --latex-engine=$(pandocEngine) -M date="`date "+%B %e, %Y"`"
 # Workbooks
@@ -56,7 +56,7 @@ pandocArgFragment := $(pandocArgCommon) --top-level-division=part --filter=$(fil
 ### pandoc workflow
 pandocArgStandalone := $(pandocArgFragment) --toc-depth=1 -s -N -H workbook-template.tex -H workbook.sty
 ## HTML/ePub
-pandocArgHTML := $(pandocArgFragment) -t $(HTMLVersion) --toc-depth=2 -s -N -H workbook-template.html -H $(mathjaxPath)/setup-mathjax-cdn.html --mathjax -c $(CSSURL)/css/common.css -c $(CSSURL)/fonts/fonts.css
+pandocArgHTML := $(pandocArgFragment) -t $(HTMLVersion) --toc-depth=2 -s -N -H workbook-template.html -H $(mathjaxPath)/setup-mathjax-cdn.html --mathjax -c $(CSSURL)/css/common.min.css -c $(CSSURL)/fonts/fonts.min.css
 pandocArgePub := $(pandocArgHTML) -t $(ePubVersion) -H $(mathjaxPath)/load-mathjax-cdn.html --epub-chapter-level=2
 # GitHub README
 pandocArgReadmeGitHub := $(pandocArgCommon) --toc-depth=2 -s -t markdown_github --reference-location=block
