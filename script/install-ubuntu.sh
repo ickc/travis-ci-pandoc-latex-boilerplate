@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # preparation
 export DEBIAN_FRONTEND=noninteractive

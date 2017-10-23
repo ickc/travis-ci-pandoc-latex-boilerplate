@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # install MacTeX
 wget http://mirror.ctan.org/systems/mac/mactex/BasicTeX.pkg -O "/tmp/BasicTeX.pkg"
