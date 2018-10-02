@@ -99,11 +99,10 @@ clean:
 	latexmk -c -f $(pandocTeX) # $(latexmkTeX)
 	rm -f $(pandocMD) $(pandocHTML) $(pandocTeX) $(CSV2List7A) $(CSV2List8A) $(CSV2ListMaster) $(MD2TeX) $(MD2Native) workbook.tex $(workbookTemplate) $(imageBroken) # $(latexmkTeX)
 	rm -rf $(pandocePubUnzip)
+	find -name '*.pdf' -delete
 ## clean everything
-Clean:
-	latexmk -C -f $(pandocTeX) # $(latexmkTeX)
-	rm -f $(pandocMD) $(pandocHTML) $(pandocTeX) $(CSV2List7A) $(CSV2List8A) $(CSV2ListMaster) $(MD2TeX) $(MD2Native) workbook.tex $(workbookTemplate) $(imageBroken) $(pandocePub) # $(latexmkTeX)
-	rm -rf $(pandocePubUnzip)
+Clean: clean
+	rm -f $(pandocePub)
 
 # update submodule and MathJax
 update:
