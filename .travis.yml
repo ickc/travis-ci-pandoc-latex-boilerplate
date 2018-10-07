@@ -1,26 +1,26 @@
 matrix:
     include:
+        # Linux container, R
         - os: linux
-          sudo: false
           language: r
-          pandoc_version: 2.0
           install:
               - pip install --user pandocfilters
               - tlmgr install latexmk physics cancel fourier utopia
           cache:
           - packages
           - pip
+        # Linux VM, R
         - os: linux
           sudo: required
           dist: trusty
           language: r
-          pandoc_version: 2.0
           install:
               - pip install -U pip pandocfilters
               - tlmgr install latexmk physics cancel fourier utopia
           cache:
           - packages
           - pip
+        # Linux VM, Python
         - os: linux
           sudo: required
           dist: trusty
@@ -33,18 +33,19 @@ matrix:
               - texlive-full
           install:
               - pip install -U pip pandocfilters
-              - wget https://github.com/jgm/pandoc/releases/download/2.0/pandoc-2.0-1-amd64.deb && sudo dpkg -i pandoc-2.0-1-amd64.deb
+              - wget https://github.com/jgm/pandoc/releases/download/2.3.1/pandoc-2.3.1-1-amd64.deb && sudo dpkg -i pandoc-2.3.1-1-amd64.deb
           cache:
           - pip
+        # macOS, R
         - os: osx
           language: r
-          pandoc_version: 2.0
           install:
               - pip install -U pip pandocfilters
               - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
           cache:
           - packages
           - pip
+        # macOS generic
         - os: osx
           language: generic
           before_install:
@@ -57,18 +58,19 @@ matrix:
               - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
           cache:
           - pip
+        # macOS xcode10, R
         - os: osx
-          osx_image: xcode8
+          osx_image: xcode10
           language: r
-          pandoc_version: 2.0
           install:
               - pip install -U pip pandocfilters
               - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
           cache:
           - packages
           - pip
+        # macOS xcode10, generic
         - os: osx
-          osx_image: xcode8
+          osx_image: xcode10
           language: generic
           before_install:
               - brew update
@@ -81,7 +83,7 @@ matrix:
           cache:
           - pip
 script:
-    - make -j4 travis
+    - make -j3 travis
 deploy:
   provider: releases
   api_key: "$GH_TOKEN"
