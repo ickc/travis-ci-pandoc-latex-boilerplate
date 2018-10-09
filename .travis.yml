@@ -82,6 +82,8 @@ matrix:
               - sudo tlmgr install latexmk physics cancel fourier utopia siunitx placeins
           cache:
           - pip
+before_script:
+    - git submodule update --init --recursive --remote
 script:
     - make -j3 travis
 deploy:
