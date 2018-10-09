@@ -338,3 +338,6 @@ lint: $(MD2TeX)
 ## detect illegal name
 detectName:
 	find . -maxdepth 2 -mindepth 2 -iname '*' | grep --color='auto' -P -H -n "[^0-9A-Za-z-/._=]"
+
+print-%:
+	$(info $* = $($*))
